@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+
+</head>
+<style>
+	.parent {
+		background-color: rgb(167, 216, 246);
+		width: 500px;
+		height: 1000px;
+		padding-left: 100px;
+		padding-right: 20px;
+
+		margin-left: 50px;
+		margin-right: 200px;
+		margin-bottom: 200px;
+		margin-top: 2px;
+		;
+	}
+</style>
+<link href="css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap.min.css">
+
+<body>
+	<!-- <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #2f087d;">
+		<a class="navbar-brand" href="index.html">
+			<h2 style="color:white">back to home</h2>
+		</a>
+	</nav> -->
+	<!-- Booking -->
+	<a href="index.html" style="color: rgb(13, 38, 118);">Home</a>
+	<img src="cab3.jpg" style="float:right;background-size: cover; margin-top: 80px;" alt="" height:50px; width:50px;>
+	<h1 style="color:rgb(21, 21, 96);text-align: center;">Booking form</h1>
+	<div class="parent">
+		<div class="row">
+			<div>
+				<h2 style="color:white">Personal Details</h2>
+				<div>
+					<form name="bookingform" action="print.html" method="post" onsubmit="return validate()"
+						cellspacing="6" cellpadding="2">
+						<div>
+							<div>
+								<div class="form-outline mb-3">
+								<input type="text" name="Name" class="form-control form-control-lg" placeholder="Full Name" id="fullName"
+									required="">
+							</div>
+							<div>
+								<input type="text" name="Phone no"class="form-control form-control-lg" placeholder="Phone number" id="phone" minlength="10"
+									maxlength="10" required=""><br>
+								
+							</div>
+						</div>
+						<div class="row ">
+							<div>
+								<input type="email" name="email" class="form-control form-control-lg"placeholder="Email" id="Email" required="">
+							</div>
+
+						</div>
+						<h2 style="color:white;">Booking Details</h2>
+						<div>
+							<div>
+								<select id="cab" class="form-control form-control-lg" onchange="change_cab(this.value)" class="frm-field required sect">
+									<option value="">Select Cab</option>
+									<option value="">Mini</option>
+									<option value="">Sedan</option>
+									<option value="">Elite</option>
+								</select><br><br>
+							</div>
+						</div>
+						<div>
+							<div>
+								<input id="date" name="date" type="date"class="form-control form-control-lg" placeholder="Pick-up Date" value="date"
+									onfocus="this.value = '';"
+									onblur="if (this.value == '') {this.value = 'dd-mm-yyyy';}" required=""><br><br>
+							</div>
+							<div>
+								<input type="time" id="timepicker" name="Time" class="form-control form-control-lg" class="timepicker form-control"
+									placeholder="Pick-up Time" value=""><br><br>
+							</div>
+						</div>
+						<div>
+							<div>
+								<input type="location" name="Location" class="form-control form-control-lg" placeholder="Pick-up Location" id="plocation"
+									required=""><br><br>
+							</div>
+							<div>
+								<input type="location" name="Location" class="form-control form-control-lg"placeholder="Drop-off Location" id="dlocation"
+									required=""><br><br>
+							</div>
+						</div>
+
+						<div>
+							<div>
+								<select id="passengers" class="form-control form-control-lg"onchange="change_country(this.value)"
+									class="frm-field required sect">
+									<option value="">No.of Passengers</option>
+									<option value="">1</option>
+									<option value="">2</option>
+									<option value="">3</option>
+									<option value="">4</option>
+									<option value="">5</option>
+								</select><br><br>
+							</div>
+							<div>
+								<select id="direction" onchange="change_country(this.value)" class="frm-field required">
+									<option value="">Direction</option>
+									<option value="">One Way</option>
+									<option value="">Return</option>
+								</select><br><br>
+							</div>
+							<div>
+								<input type="submit" value="Book Now" onClick="javascript:saveData();" id="submit">
+								<input type="reset" value="Reset">
+
+					</form>
+				</div>
+			</div>
+			<div class="col-lg-6 mt-md-5">
+				<img src="images/car1.png" alt="" class="img-fluid" />
+				<img src="images/car2.png" alt="" class="img-fluid" />
+			</div>
+		</div>
+	</div>
+	</section>
+
+	<!-- //Booking -->
+	<script>
+		function saveData() {
+
+			alert("saved successfully");
+			var firstName = document.getElementById('fullName').value;
+			var phone = document.getElementById('phone').value;
+			var email = document.getElementById('email').value;
+			var cab = document.getElementById("cab").value;
+            var date = document.getElementById("date").value;
+			var time = document.getElementById("timepicker").value;
+			var plocation = document.getElementById("plocation").value;
+            var dlocation = document.getElementById("dlocation").value;	
+			var passengers = document.getElementById("passengers").value;	
+			var direction = document.getElementById("direction").value;	
+
+			localStorage.setItem("fullName", fullName);
+			localStorage.setItem("phone", phone);
+			localStorage.setItem("email", email);
+			localStorage.setItem("cab",cab);
+			localStorage.setItem("date",date);
+			localStorage.setItem("time",time);
+			localStorage.setItem("plocation",plocation);
+			localStorage.setItem("dlocation",dlocation);
+			localStorage.setItem("passenger",passenger);
+			localStorage.setItem("direction",direction);
+
+
+
+		}
+
+
+		function validate() {
+			var num = document.bookingform.phone.value;
+			if (isNaN(num)) {
+				document.getElementById("numloc").innerHTML = "Enter Numeric value only";
+				return false;
+			}
+			else {
+				return true;
+			}
+			if (document.bookingform.cab.selectedIndex == "") {
+				alert("Please select cab type!");
+				return false;
+			}
+			
+			//get the selected option
+			var selectedText = sel.options[sel.selectedIndex].text;
+			alert("You have selected : " + selectedText);
+			return true;
+		}	
+
+
+
+
+
+	</script>
+</body>
+
+</html>
